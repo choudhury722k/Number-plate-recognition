@@ -25,9 +25,7 @@ Fps and memory usage can be improved by training a single YOLOv4 model for both 
 
 ### How to train:
 1. Download dataset zip from this link - https://www.kaggle.com/tustunkok/license-plate-detection/data
-2. Create a folder named 'dataset' inside 'data' and extract the content of zip into 'dataset' folder.
-3. Go to 'data' folder and run this command on cmd - "python augmentation.py". After augmentation total number of images will be 2154.
-4. Now to train darknet YOLOv4 on the dataset, follow the steps given here - https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects
+2. Now to train darknet YOLOv4 on the dataset, follow the steps given here - https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects
 
 ### References
 1. https://www.kaggle.com/tustunkok/license-plate-detection/data </br>
