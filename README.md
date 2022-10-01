@@ -6,6 +6,15 @@
 2. License plate text detection and recognition using keras-ocr. </br>
 3. Rejecting false positives by matching pattern with Indian license plates. </br>
 
+### Conda tool for environment setup
+# Tensorflow CPU
+conda env create -f conda-cpu.yml
+conda activate yolov4-cpu
+
+# Tensorflow GPU
+conda env create -f conda-gpu.yml
+conda activate yolov4-gpu
+
 ### Demo:
 Download pretrained model from [here](https://drive.google.com/drive/folders/1MEyGB-ogHhqnyT5cW5-Vk3wwHowghOCK?usp=sharing) and copy it inside "data" folder. Then create a new environment in you desktop or raspberry pi with the specific libraries inside the requirements.txt file and the run the detect_tf.py file for running the inference on the trined yolov4 trnsorflow model and then run the tensorflow model with detect_tflite.py</br>
 
