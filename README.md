@@ -6,32 +6,8 @@
 2. License plate text detection and recognition using keras-ocr. </br>
 3. Rejecting false positives by matching pattern with Indian license plates. </br>
 
-### Requirements:
-&nbsp;&nbsp; absl-py==0.9.0 </br>
-&nbsp;&nbsp; easydict==1.9 </br>
-&nbsp;&nbsp; keras_ocr==0.8.3 </br>
-&nbsp;&nbsp; opencv-python==4.2.0.34 </br>
-&nbsp;&nbsp; tensorflow==2.2.0 </br>
-
 ### Demo:
-&nbsp; Download pretrained model from [here](https://drive.google.com/file/d/1cAcL8E3segwC10vP404MZBi1sBRv-it-/view?usp=sharing) and copy it inside "data" folder. </br>
-<pre><code> #Run demo on sample video with default arguments
- python demo_video.py
- 
- #Run demo with command line arguments </br>
- python demo_video.py --input "Input_video_path" --output "Path_to_save_result" --size "frame_size"
- 
- #Example
- python demo_video.py --input inputs/demo1.mp4 --output results/output1.avi --size 608 </code></pre>
-
-<pre><code>#Run demo on sample image with default arguments
-python demo.py
-
-#Run demo with command line arguments
-python demo_video.py --input "Input_image_path" --output "Path_to_save_result" --size "frame_size"
-
-#Example
-python demo.py --input inputs/1.jpg --output results/output1.jpg --size 608 </code></pre>
+&nbsp; Download pretrained model from [here](https://drive.google.com/drive/folders/1MEyGB-ogHhqnyT5cW5-Vk3wwHowghOCK?usp=sharing) and copy it inside "data" folder. </br>
 
 #Note - 
 1. Command line argument 'size' must be a multiple of 32. Increasing 'size' increases the accuracy of license plate detection but requires more memory. Reduce the size if your gpu runs out of memory.
@@ -58,6 +34,6 @@ Fps and memory usage can be improved by training a single YOLOv4 model for both 
 1. https://www.kaggle.com/tustunkok/license-plate-detection/data </br>
 2. https://github.com/AlexeyAB/darknet </br>
 3. https://github.com/hunglc007/tensorflow-yolov4-tflite </br>
-4. http://openaccess.thecvf.com/content_ICCVW_2019/papers/RLQ/Nguyen_State-of-the-Art_in_Action_Unconstrained_Text_Detection_ICCVW_2019_paper.pdf </br>
-5. https://pypi.org/project/keras-ocr/ </br>
-6. http://www.rto.org.in/vehicle-registration-plates-of-india/format-of-number-plates.htm
+4. http://www.rto.org.in/vehicle-registration-plates-of-india/format-of-number-plates.htm
+
+THANK YOU :)
