@@ -6,13 +6,13 @@
 2. License plate text detection and recognition using keras-ocr. </br>
 3. Rejecting false positives by matching pattern with Indian license plates. </br>
 
-### Conda tool for environment setup
-# Tensorflow CPU
-conda env create -f conda-cpu.yml
+# Conda tool for environment setup
+### Tensorflow CPU
+conda env create -f conda-cpu.yml \n
 conda activate yolov4-cpu
 
-# Tensorflow GPU
-conda env create -f conda-gpu.yml
+### Tensorflow GPU
+conda env create -f conda-gpu.yml \n
 conda activate yolov4-gpu
 
 ### Demo:
