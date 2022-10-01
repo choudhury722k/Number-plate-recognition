@@ -12,7 +12,7 @@ Download pretrained model from [here](https://drive.google.com/drive/folders/1ME
 #Note - 
 1. Command line argument 'size' must be a multiple of 32. Increasing 'size' increases the accuracy of license plate detection but requires more memory. Reduce the size if your gpu runs out of memory.
 2. If the gpu-ram is 4 GB or less, Reduce memory-limit in the detct_tflite.py to a value less than your gpu-ram.
-3. Since there are 3 models running in a sequence(yolov4 for license plate detection, keras-ocr CRAFT text detection and keras-ocr CRNN text recognition), memory usage is high and fps is low. This solution gives an average fps of 2.5 on gtx 1660 gpu.
+3. Since there are 3 models running in a sequence(yolov4 for license plate detection, keras-ocr CRAFT text detection and keras-ocr CRNN text recognition), memory usage is high and fps is low. This solution gives an average fps of 2.5 on gtx 1650ti gpu.
 Fps and memory usage can be improved by training a single YOLOv4 model for both license plate detection and text recognition.
 
 ### Results:
