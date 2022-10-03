@@ -21,7 +21,6 @@ Fps and memory usage can be improved by training a single YOLOv4 model for both 
 ![results/output3.jpg](https://github.com/keshavoct98/License-Plate-Recognition/blob/master/results/output3.jpg)
 ![results/output4.jpg](https://github.com/keshavoct98/License-Plate-Recognition/blob/master/results/output4.jpg)
 ![results/output1.gif](https://github.com/keshavoct98/License-Plate-Recognition/blob/master/results/output1.gif)
-![results/output2.gif](https://github.com/keshavoct98/License-Plate-Recognition/blob/master/results/output2.gif)
 
 ### How to train:
 1. Download dataset zip from this link - https://www.kaggle.com/tustunkok/license-plate-detection/data
