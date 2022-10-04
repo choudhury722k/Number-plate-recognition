@@ -34,9 +34,9 @@ XYSCALE = cfg.YOLO.XYSCALE
 STRIDES = np.array(cfg.YOLO.STRIDES)
 ANCHORS = utils.get_anchors(cfg.YOLO.ANCHORS, False)
 NUM_CLASS = len(utils.read_class_names(cfg.YOLO.CLASSES))
-# video_path = '/home/soumya/Number Plate Recognition/inputs/demo1.mp4'
+video_path = '/home/soumya/Number Plate Recognition/inputs/demo2.mp4'
 
-video_path = 0
+#video_path = 0
 
 dont_show_video = False
 dont_show_image = False
@@ -61,9 +61,6 @@ def platePattern(string):
         return True
     
 def drawText(img, plates):
-    '''Draws recognized plate numbers on the
-    top-left side of frame
-    '''
     string  = 'plates detected :- ' + plates[0]
     for i in range(1, len(plates)):
         string = string + ', ' + plates[i]
@@ -104,8 +101,8 @@ def image_input():
     interpreter.set_tensor(input_details[0]['index'], images_data)
     interpreter.invoke()
     pred = [interpreter.get_tensor(output_details[i]['index']) for i in range(len(output_details))]
-    boxes, pred_conf = filter_boxes(pred[0], pred[1], score_threshold=0.25, input_shape=tf.constant([input_size, input_size]))
 
+    boxes, pred_conf = filter_boxes(pred[0], pred[1], score_threshold=0.25, input_shape=tf.constant([input_size, input_size]))
     boxes, scores, classes, valid_detections = tf.image.combined_non_max_suppression(
         boxes=tf.reshape(boxes, (tf.shape(boxes)[0], -1, 1, 4)),
         scores=tf.reshape(pred_conf, (tf.shape(pred_conf)[0], -1, tf.shape(pred_conf)[-1])),
@@ -116,14 +113,8 @@ def image_input():
 
     pred_bbox = [boxes.numpy(), scores.numpy(), classes.numpy(), valid_detections.numpy()]
 
-    # read in all class names from config
     class_names = utils.read_class_names(cfg.YOLO.CLASSES)
-
-    # by default allow all classes in .names file
     allowed_classes = list(class_names.values())
-
-    # custom allowed classes (uncomment line below to allow detections for only people)
-    #allowed_classes = ['person']
 
     image = utils.draw_bbox(original_image, pred_bbox, allowed_classes = allowed_classes)
     image = Image.fromarray(image.astype(np.uint8))
@@ -133,7 +124,6 @@ def image_input():
     image = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
     box = pred_bbox[0][0][0]
     licence_plate_image = image[int(box[0]):int(box[2]), int(box[1]):int(box[3])]
-    print(type(licence_plate_image))
 
     prediction_groups = pipeline.recognize([licence_plate_image]) # Text detection and recognition on license plate
     string = ''
@@ -189,6 +179,7 @@ def video_input():
         boxes, pred_conf = filter_boxes(pred[0], pred[1], score_threshold=0.25,
                                         input_shape=tf.constant([input_size, input_size]))
 
+        
         boxes, scores, classes, valid_detections = tf.image.combined_non_max_suppression(
             boxes=tf.reshape(boxes, (tf.shape(boxes)[0], -1, 1, 4)),
             scores=tf.reshape(
@@ -212,18 +203,18 @@ def video_input():
         box = pred_bbox[0][0][0]
         licence_plate_image = img[int(box[0]):int(box[2]), int(box[1]):int(box[3])]
 
-        # if(box[0] > 0 and box[1] > 0):
-        #     prediction_groups = pipeline.recognize([licence_plate_image]) # Text detection and recognition on license plate
-        #     Licence_Number = ''
-        #     for j in range(len(prediction_groups[0])):
-        #         Licence_Number = Licence_Number+ prediction_groups[0][j][0].upper()
-        #     print(Licence_Number)
+        if(box[0] > 0 and box[1] > 0):
+            prediction_groups = pipeline.recognize([licence_plate_image]) # Text detection and recognition on license plate
+            Licence_Number = ''
+            for j in range(len(prediction_groups[0])):
+                Licence_Number = Licence_Number+ prediction_groups[0][j][0].upper()
+            print(Licence_Number)
 
-        #     if platePattern(Licence_Number) == True and Licence_Number not in plates:
-        #         plates.append(Licence_Number)
+            if platePattern(Licence_Number) == True and Licence_Number not in plates:
+               plates.append(Licence_Number)
         
-        # if len(plates) > 0:
-        #     drawText(frame, plates)
+        if len(plates) > 0:
+            drawText(result, plates)
 
         if not dont_show_video:
             cv2.imshow("result", result)
@@ -233,5 +224,5 @@ def video_input():
     vid.release()
     cv2.destroyAllWindows()
 
-# image_input()
+#image_input()
 video_input()
