@@ -118,18 +118,27 @@ def image_input():
 
     image = utils.draw_bbox(original_image, pred_bbox, allowed_classes = allowed_classes)
     image = Image.fromarray(image.astype(np.uint8))
-    if not dont_show_image:
-        image.show()
-
+    
     image = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
     box = pred_bbox[0][0][0]
     licence_plate_image = image[int(box[0]):int(box[2]), int(box[1]):int(box[3])]
 
     prediction_groups = pipeline.recognize([licence_plate_image]) # Text detection and recognition on license plate
-    string = ''
+    Licence_Number = ''
     for j in range(len(prediction_groups[0])):
-        string = string+ prediction_groups[0][j][0].upper()
-    print(string)
+        Licence_Number = Licence_Number+ prediction_groups[0][j][0].upper()
+    print(Licence_Number)
+
+    plates = []
+    if platePattern(Licence_Number) == True and Licence_Number not in plates:
+               plates.append(Licence_Number)
+
+    if len(plates) > 0:
+            drawText(image, plates) 
+
+    image = Image.fromarray(image.astype(np.uint8))
+    if not dont_show_image:
+        image.show()        
 
     licence_plate_image = Image.fromarray(licence_plate_image.astype(np.uint8))
     if not dont_show_licence_plate:
@@ -224,5 +233,5 @@ def video_input():
     vid.release()
     cv2.destroyAllWindows()
 
-#image_input()
-video_input()
+image_input()
+# video_input()
