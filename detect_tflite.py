@@ -34,9 +34,9 @@ XYSCALE = cfg.YOLO.XYSCALE
 STRIDES = np.array(cfg.YOLO.STRIDES)
 ANCHORS = utils.get_anchors(cfg.YOLO.ANCHORS, False)
 NUM_CLASS = len(utils.read_class_names(cfg.YOLO.CLASSES))
-video_path = '/home/soumya/Number Plate Recognition/inputs/demo2.mp4'
+video_path = '/home/soumya/Projects/Number Plate Recognition/inputs/demo1.mp4'
 
-#video_path = 0
+# video_path = 0
 
 dont_show_video = False
 dont_show_image = False
@@ -233,5 +233,5 @@ def video_input():
     vid.release()
     cv2.destroyAllWindows()
 
-image_input()
-# video_input()
+# image_input()
+video_input()
