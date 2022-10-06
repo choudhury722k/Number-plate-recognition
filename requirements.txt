@@ -3,5 +3,4 @@ tensorflow==2.8.2
 opencv-contrib-python
 keras-ocr
 numpy
-base64
 json
