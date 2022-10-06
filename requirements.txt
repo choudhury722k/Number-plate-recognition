@@ -1,7 +1,7 @@
 flask==2.1.3
 tensorflow==2.8.2
 opencv-contrib-python
-keras-ocr==0.8.5
+keras-ocr
 numpy==1.23.1
 base64
 json
