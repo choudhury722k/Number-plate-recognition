@@ -11,9 +11,6 @@ from io import BytesIO
 from datetime import datetime
 from tflite_runtime.interpreter import Interpreter
 
-# import keras_ocr
-# pipeline = keras_ocr.pipeline.Pipeline()
-
 iou = 0.45
 threshold = 0.40
 input_size = 416
@@ -152,12 +149,6 @@ def image_input():
     box = crop
     licence_plate_image = img[int(box[0]):int(box[2]), int(box[1]):int(box[3])]
     
-    # prediction_groups = pipeline.recognize([licence_plate_image]) # Text detection and recognition on license plate
-    # string = ''
-    # for j in range(len(prediction_groups[0])):
-    #    string = string+ prediction_groups[0][j][0].upper()
-    # print(string)    
-    
     licence_plate_image = Image.fromarray(licence_plate_image.astype(np.uint8))
     if not dont_show_licence_plate:
         licence_plate_image.show()
@@ -187,8 +178,6 @@ def video_input():
     interpreter.allocate_tensors()
     input_details = interpreter.get_input_details()
     output_details = interpreter.get_output_details()
-    # print(input_details)
-    # print(output_details)
 
     plates = []
 
@@ -265,7 +254,7 @@ def video_input():
         random.shuffle(colors)
         random.seed(None)
 
-        if max_th > 0.9:
+        if max_th > 0.90:
 
             coor = bbox
             coor[0] = int(coor[0] * image_h)
@@ -286,17 +275,29 @@ def video_input():
             box = crop
             licence_plate_image = img[int(box[0]):int(box[2]), int(box[1]):int(box[3])]
 
-            # prediction_groups = pipeline.recognize([licence_plate_image]) # Text detection and recognition on license plate
-            # Licence_Number = ''
-            # for j in range(len(prediction_groups[0])):
-            #     Licence_Number = Licence_Number+ prediction_groups[0][j][0].upper()
-            # print(Licence_Number)
+            licence_plate_image = Image.fromarray(licence_plate_image.astype(np.uint8))
+            buffered = BytesIO()
+            licence_plate_image.save(buffered, format="JPEG")
+            img_byte = buffered.getvalue() 
+            img_base64 = base64.b64encode(img_byte)
+
+            img_str = img_base64.decode('utf-8') 
+            # print(img_str)
+
+            files = {"text":"Licence plate",
+                    "img":img_str}
+
+            # r = requests.post("http://127.0.0.1:5000", json=json.dumps(files)) #POST to server as json
+            # print(r.json())
 
             # if platePattern(Licence_Number) == True and Licence_Number not in plates:
-            #    plates.append(Licence_Number)
-        
-        # if len(plates) > 0:
-        #     drawText(result, plates)
+            #    plates.append(Licence_Number)        
+
+            date = datetime.now().strftime("%Y_%m_%d_%I_%M_%S_%p")
+            # print(date)
+
+            data = {"Licence plate":"",
+                    "time":date}
 
         fps = 1.0 / (time.time() - start_time)
         print("FPS: %.2f" % fps)
@@ -312,4 +313,4 @@ def video_input():
     cv2.destroyAllWindows()
 
 
-image_input()
+video_input()
