@@ -1,4 +1,4 @@
-# License-Plate-Recognition
+# Chaurah: Smart Raspberry-Pi Parking System
 1. License plate detection using **YOLOv4** trained on custom data. </br>
   mAP :- 88.25%(IoU threshold = 50%) </br>
   avg IoU :- 62.87%(conf_threshold = 0.25) </br>
